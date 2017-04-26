@@ -384,7 +384,7 @@ DynaTreeNode.prototype = {
 		if( !parent && !this.ul ) {
 			// Root node has only a <ul>
 			this.li = this.span = null;
-			this.ul = document.createElement("ul");
+			this.ul = document.createElement(this.tree.options.parentSelector);
 			if( opts.minExpandLevel > 1 ){
 				this.ul.className = cn.container + " " + cn.noConnector;
 			}else{
@@ -406,7 +406,7 @@ DynaTreeNode.prototype = {
 				if( !parent.ul ) {
 					// This is the parent's first child: create UL tag
 					// (Hidden, because it will be
-					parent.ul = document.createElement("ul");
+					parent.ul = document.createElement(this.tree.options.childSelector);
 					parent.ul.style.display = "none";
 					parent.li.appendChild(parent.ul);
 //                  if( opts.minExpandLevel > this.getLevel() ){
@@ -1950,7 +1950,7 @@ DynaTreeNode.prototype = {
 		if( !targetParent.ul ) {
 			// This is the parent's first child: create UL tag
 			// (Hidden, because it will be
-			targetParent.ul = document.createElement("ul");
+			targetParent.ul = document.createElement(this.tree.options.childSelector);
 			targetParent.ul.style.display = "none";
 			if( targetParent.li ){
 				targetParent.li.appendChild(targetParent.ul);
@@ -3135,6 +3135,8 @@ $.extend($.ui.dynatree, {
  */
 $.ui.dynatree.prototype.options = {
 	title: "Dynatree", // Tree's name (only used for debug output)
+	parentSelector: "ul", //
+	childSelector: "ul", //
 	minExpandLevel: 1, // 1: root node is not collapsible
 	imagePath: null, // Path to a folder containing icons. Defaults to 'skin/' subdirectory.
 	children: null, // Init tree structure from this object array.
